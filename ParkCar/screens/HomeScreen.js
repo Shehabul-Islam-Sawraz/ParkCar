@@ -26,7 +26,7 @@ const HomeScreen = ({navigation}) => {
           placeholder = "Where From?"
           listViewDisplayed = "auto"
           query = {{
-            key: 'AIzaSyChApmJ2gd-eo_gjKu8uUT7o3LbE0yI9MQ',
+            key: GOOGLE_MAPS_API_KEY,
             language: 'en',
           }}
           minLength = {2}
