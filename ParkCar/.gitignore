@@ -33,7 +33,7 @@ local.properties
 .cxx/
 *.keystore
 !debug.keystore
-app/src/main/AndroidManifest.xml
+android/app/src/main/AndroidManifest.xml
 
 # node.js
 #
