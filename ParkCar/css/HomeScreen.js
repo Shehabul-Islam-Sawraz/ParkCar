@@ -17,5 +17,13 @@ export const styles = StyleSheet.create({
     },
     navCardContainer: tw`p-2 pl-6 pb-8 pt-2 bg-gray-200 m-2 w-40 rounded-lg`,
     navCardTitle: tw`text-lg font-semibold`,
-    navCardIcon: tw`p-1 bg-black rounded-full w-10 mt-4`
+    navCardIcon: tw`p-1 bg-black rounded-full w-10 mt-4`,
+    whereFromContainer: {
+        container: {
+            flex: 0, 
+        },
+        textInput: {
+            fontSize: 18,
+        },
+    }
 });

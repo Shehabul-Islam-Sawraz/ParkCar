@@ -74,3 +74,5 @@ yarn-error.log
 
 # watchman
 .watchmanconfig
+
+.env
