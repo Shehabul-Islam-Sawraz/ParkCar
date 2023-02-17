@@ -3,7 +3,7 @@ import React from 'react';
 import { styles } from '../css/HomeScreen';
 import Navigator from '../components/Navigator';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   return (
     <SafeAreaView style = {styles.homeSafeAreaView}>
       <View style = {styles.logoContainer}>
