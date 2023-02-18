@@ -27,27 +27,25 @@ const HomeScreen = ({navigation}) => {
           listViewDisplayed = "auto"
           query = {{
             key: GOOGLE_MAPS_API_KEY,
-            language: 'en',
+            language: "en",
           }}
           minLength = {2}
           returnKeyType = {"search"}
           onPress={(data, details = null) => {
             // 'details' is provided when fetchDetails = true
-            console.log(data, details);
+            //console.log(data, details);
 
             // Setting the selected location as source
-            // dispatch(
-            //   setSource({
-            //     location: details.geometry.location,
-            //     description: data.description,
-            //   })
-            // );
+            dispatch(setSource({
+                location: details.geometry.location,
+                description: data.description,
+            }));
 
-            // // Setting destination as null, because we haven't selected it yet
-            // dispatch(setDestination(null));
+            // Setting destination as null, because we haven't selected it yet
+            dispatch(setDestination(null));
           }}
           enablePoweredByContainer = {false}
-          fetchDetails
+          fetchDetails = {true}
           onFail={error => console.log('error' + error)}
         />
 

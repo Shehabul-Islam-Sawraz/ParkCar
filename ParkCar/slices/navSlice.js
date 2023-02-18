@@ -12,7 +12,7 @@ export const navSlice = createSlice({
     name: 'nav', // Name of the slice
     initialState,
     // When we push info into data layer we need a dispatch action
-    reducer: {
+    reducers: {
         // First parameter in current state, second parameter is the action
         // when we make the dispatch from the component to the data layer
         setSource: (state, action) => {
