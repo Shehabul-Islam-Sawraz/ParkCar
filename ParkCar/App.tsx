@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, KeyboardAvoidingView, Platform} from 'react-native';
 import { Provider } from 'react-redux';
 import HomeScreen from './screens/HomeScreen';
 import Store from './Store';
@@ -16,22 +16,28 @@ const HelloWorldApp = () => {
         <Provider store={Store}> 
             <NavigationContainer>
                 <SafeAreaProvider>
-                    <Stack.Navigator>
-                        <Stack.Screen
-                            name = 'HomeScreen'
-                            component = {HomeScreen}
-                            options = {{
-                                headerShown: false, // Hiding the header of the screen
-                            }}
-                        />
-                        <Stack.Screen
-                            name = 'MapScreen'
-                            component = {MapScreen}
-                            options = {{
-                                headerShown: false, // Hiding the header of the screen
-                            }}
-                        />
-                    </Stack.Navigator>
+                    {/** Without flex=1, screen can't be seen */}
+                    <KeyboardAvoidingView 
+                        style = {{flex: 1}}
+                        behavior = {Platform.OS === "ios" ? "padding" : "height"}
+                        keyboardVerticalOffset = {Platform.OS === "ios" ? -64 : 32}> 
+                            <Stack.Navigator>
+                                <Stack.Screen
+                                    name = 'HomeScreen'
+                                    component = {HomeScreen}
+                                    options = {{
+                                        headerShown: false, // Hiding the header of the screen
+                                    }}
+                                />
+                                <Stack.Screen
+                                    name = 'MapScreen'
+                                    component = {MapScreen}
+                                    options = {{
+                                        headerShown: false, // Hiding the header of the screen
+                                    }}
+                                />
+                            </Stack.Navigator>
+                    </KeyboardAvoidingView>
                 </SafeAreaProvider>
             </NavigationContainer>
         </Provider>
