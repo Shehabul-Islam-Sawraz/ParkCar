@@ -3,10 +3,13 @@ import React from 'react';
 import tw from 'tailwind-react-native-classnames';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import { useSelector } from 'react-redux';
-import { selectSource } from '../slices/navSlice';
+import { selectDestination, selectSource } from '../slices/navSlice';
+import MapViewDirections from 'react-native-maps-directions';
+import { GOOGLE_MAPS_API_KEY } from "@env";
 
 const Map = () => {
   const source = useSelector(selectSource);
+  const destination = useSelector(selectDestination);
 
   return (
     <MapView
@@ -21,6 +24,15 @@ const Map = () => {
         }}
     >
       {/**?. says that source may be undefined, so its optional*/}
+      {source && destination && (
+        <MapViewDirections
+          origin = {source.description}
+          destination = {destination.description}
+          apikey = {GOOGLE_MAPS_API_KEY}
+          strokeWidth = {3}
+          strokeColor = "black"
+        />
+      )}
       {source?.location && (
         <Marker
           coordinate = {{
