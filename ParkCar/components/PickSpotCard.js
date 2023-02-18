@@ -62,7 +62,7 @@ const PickSpotCard = () => {
                             color = {Colors.white}
                             size = {16}
                         />
-                        <Text style = {styles.footerIconText1}>Spots</Text>
+                        <Text style = {styles.footerIconText1}>Slots</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style = {styles.footerIconContainer2}>

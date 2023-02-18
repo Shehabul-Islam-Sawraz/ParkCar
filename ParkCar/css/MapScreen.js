@@ -34,11 +34,23 @@ export const styles = StyleSheet.create({
     selectSpotText: tw`text-center py-5 text-xl`,
     popularSpotContainer: tw`flex-row items-center justify-between px-6 mb-2 bg-gray-200 rounded-lg`,
     popularSpotContainer2: {
-        height: 90, 
+        height: 80, 
         width: dimensionScreen.width/1.04, 
         alignSelf: 'center',
     },
     textLarge: tw`text-lg font-bold text-black`,
     textMedium: tw`text-base font-semibold text-gray-900`,
     textSmall: tw`text-sm font-semibold text-gray-800`,
+    chooseSpotButton: tw`bg-black py-2 m-3 rounded-lg`,
+    chooseSpotButtonText: tw`text-center text-white text-lg pl-5 pr-5 mb-1`,
+    filterButton: {
+        paddingLeft: 18,
+    },
+    filterSortContainer: {
+        flexDirection: 'row', 
+        justifyContent: 'flex-end', 
+        marginBottom: 15, 
+        marginTop: -45,
+        paddingRight: 20,
+    }
 });
