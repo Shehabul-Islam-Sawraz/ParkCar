@@ -14,19 +14,21 @@ const Map = () => {
   const mapRef = useRef(null); // Making a reference to map, so we can change its characteristics
 
   useEffect(() => {
-      if(!source || !destination){ // If source or destination is not selected, then return
+      if(!source || !destination || !mapRef.current){ // If source or destination is not selected, then return
         return;
       }
 
-      // Zoom & fit to markers
-      // Here `source` & `destination` are the identifier we have initialized in this page below
-      mapRef.current
-          .fitToSuppliedMarkers(['source', 'destination'], {
-            animated: true,  
-            edgePadding: { top: 50, right: 50, bottom: 50, left: 50 }, // This edgePadding will make a padding to the map markers, so that they don't show up on the screen edge
-          });
+      setTimeout(() => {
+          if(source && destination && mapRef.current){ // If source or destination is not selected, then return
+            mapRef?.current
+            ?.fitToSuppliedMarkers(['source', 'destination'], {
+              animated: true,  
+              edgePadding: { top: 50, right: 50, bottom: 50, left: 50 }, // This edgePadding will make a padding to the map markers, so that they don't show up on the screen edge
+            });
+          }
+      }, 1000);
       
-  }, [source, destination])
+  }, [source, destination, mapRef])
 
   return (
     <MapView
@@ -40,7 +42,6 @@ const Map = () => {
             latitudeDelta: 0.0222,
             longitudeDelta: 0.0121,
         }}
-        
     >
 
       {source && destination && (
