@@ -7,6 +7,7 @@ import { GOOGLE_MAPS_API_KEY } from "@env";
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { setDestination } from '../slices/navSlice';
+import FavSourceSpots from './FavSourceSpots';
 
 const PickSpotCard = () => {
     const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const PickSpotCard = () => {
                         onFail={error => console.log('error' + error)}
                     />
                 </View>
+                <FavSourceSpots/>
             </View>
         </SafeAreaView>
     );

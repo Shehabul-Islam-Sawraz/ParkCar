@@ -6,6 +6,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import { GOOGLE_MAPS_API_KEY } from "@env";
 import { useDispatch } from 'react-redux';
 import { setDestination, setSource } from '../slices/navSlice';
+import FavSourceSpots from '../components/FavSourceSpots';
 
 const HomeScreen = ({navigation}) => {
   // We need dispatch to push data to the data layer
@@ -48,8 +49,8 @@ const HomeScreen = ({navigation}) => {
           fetchDetails = {true}
           onFail={error => console.log('error' + error)}
         />
-
         <Navigator/>
+        <FavSourceSpots/>
       </View>
     </SafeAreaView>
   );
