@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../css/MapScreen';
@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { setDestination } from '../slices/navSlice';
 import FavSourceSpots from './FavSourceSpots';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Colors from '../Themes/Colors';
 
 const PickSpotCard = () => {
     const dispatch = useDispatch();
@@ -50,6 +52,27 @@ const PickSpotCard = () => {
                     />
                 </View>
                 <FavSourceSpots/>
+            </View>
+            <View style = {styles.footerContainer}>
+                <TouchableOpacity 
+                    style = {styles.footerIconContainer1}
+                    onPress = {() => navigation.navigate('PopularSpotsCard')}>
+                        <Icon 
+                            name = "car"
+                            color = {Colors.white}
+                            size = {16}
+                        />
+                        <Text style = {styles.footerIconText1}>Spots</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style = {styles.footerIconContainer2}>
+                    <Icon 
+                        name = "search"
+                        color = {Colors.black}
+                        size = {16}
+                    />
+                    <Text style = {styles.footerIconText2}>Advance Search</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );

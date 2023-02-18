@@ -1,6 +1,8 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import tw from 'tailwind-react-native-classnames';
 import Colors from "../Themes/Colors";
+
+const dimensionScreen = Dimensions.get('screen');
 
 export const styles = StyleSheet.create({
     mapScreenView: tw`h-1/2`,
@@ -22,5 +24,21 @@ export const styles = StyleSheet.create({
             paddingHorizontal: 20,
             paddingBottom: 0,
         },
-    }
+    },
+    footerContainer: tw`flex-row bg-white justify-evenly py-2 mt-auto border-t border-gray-200`,
+    footerIconContainer1: tw`flex flex-row justify-between bg-black w-24 px-4 py-2.5 rounded-full`,
+    footerIconContainer2: tw`flex flex-row justify-between w-24 px-4 py-2.5 rounded-full w-40 bg-gray-200`,
+    footerIconText1: tw`text-white text-center`,
+    footerIconText2: tw`text-center text-black`,
+    backButton: tw`absolute top-3 left-5 z-50 p-3 rounded-full`,
+    selectSpotText: tw`text-center py-5 text-xl`,
+    popularSpotContainer: tw`flex-row items-center justify-between px-6 mb-2 bg-gray-200 rounded-lg`,
+    popularSpotContainer2: {
+        height: 90, 
+        width: dimensionScreen.width/1.04, 
+        alignSelf: 'center',
+    },
+    textLarge: tw`text-lg font-bold text-black`,
+    textMedium: tw`text-base font-semibold text-gray-900`,
+    textSmall: tw`text-sm font-semibold text-gray-800`,
 });
