@@ -19,7 +19,20 @@ const Map = () => {
             latitudeDelta: 0.005,
             longitudeDelta: 0.005,
         }}
-    />
+    >
+      {/**?. says that source may be undefined, so its optional*/}
+      {source?.location && (
+        <Marker
+          coordinate = {{
+            latitude: source.location.lat,
+            longitude: source.location.lng,
+          }}
+          title = "Origin"
+          description= {source.description}
+          identifier = "source"
+        />
+      )}
+    </MapView>
   );
 };
 

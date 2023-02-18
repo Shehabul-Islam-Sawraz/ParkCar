@@ -6,6 +6,9 @@ import { styles } from '../css/HomeScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../Themes/Colors';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { selectSource } from '../slices/navSlice';
+import tw from 'tailwind-react-native-classnames';
 
 const data = [
     {
@@ -24,6 +27,7 @@ const data = [
 
 const Navigator = () => {
     const navigation = useNavigation();
+    const source = useSelector(selectSource); // Fetching source from data layer
 
     return (
         <FlatList
@@ -32,8 +36,11 @@ const Navigator = () => {
             renderItem = {({item}) => (
                 <TouchableOpacity
                     onPress = {() => navigation.navigate(item.screen)} // This will help to navigate to the item's screen(When `Get a Spot` is clicked we navigate to MapScreen)
-                    style = {styles.navCardContainer}>
-                        <View>
+                    style = {styles.navCardContainer}
+                    disabled = {!source} // If there is no touch selected, then make `Get a Spot` button disabled
+                >
+                        {/**If there is no source selected, then make the opacity of the buttons 20 */}
+                        <View style = {tw`${!source && "opacity-20"}`}> 
                             <Image
                                 resizeMode = "contain"
                                 style = {styles.navigatorImage}

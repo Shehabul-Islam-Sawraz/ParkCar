@@ -33,7 +33,7 @@ const HomeScreen = ({navigation}) => {
           returnKeyType = {"search"}
           onPress={(data, details = null) => {
             // 'details' is provided when fetchDetails = true
-            //console.log(data, details);
+            // console.log(data, details);
 
             // Setting the selected location as source
             dispatch(setSource({
