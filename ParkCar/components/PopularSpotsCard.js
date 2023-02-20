@@ -126,7 +126,6 @@ const PopularSpotsCard = () => {
                       Advance Search
                     </Text>
                 </TouchableOpacity>
-                {/* <Text> Siuuuuuuu</Text> */}
               </View>
             </View>
         </SafeAreaView>
