@@ -2,16 +2,17 @@ import { Text, View } from 'react-native';
 import React, { useRef, useEffect } from 'react';
 import tw from 'tailwind-react-native-classnames';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import { useSelector } from 'react-redux';
-import { selectDestination, selectSource } from '../slices/navSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectDestination, selectSource, setTravelTimeInformation } from '../slices/navSlice';
 import MapViewDirections from 'react-native-maps-directions';
-import { GOOGLE_MAPS_API_KEY } from "@env";
+import { GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_APIKEY } from "@env";
 
 
 const Map = () => {
   const source = useSelector(selectSource);
   const destination = useSelector(selectDestination);
   const mapRef = useRef(null); // Making a reference to map, so we can change its characteristics
+  const dispatch = useDispatch();
 
   useEffect(() => {
       if(!source || !destination || !mapRef.current){ // If source or destination is not selected, then return
@@ -26,9 +27,31 @@ const Map = () => {
               edgePadding: { top: 50, right: 50, bottom: 50, left: 50 }, // This edgePadding will make a padding to the map markers, so that they don't show up on the screen edge
             });
           }
-      }, 1000);
+      }, 1000); // Timeout is required for loading the map zoom & fit
       
-  }, [source, destination, mapRef])
+  }, [source, destination, mapRef]);
+
+  useEffect(() => {
+      if(!source || !destination){ // If source or destination is not selected, then return
+        return;
+      }
+
+      const getTravelTime = async () => {
+          fetch(
+              `https://maps.googleapis.com/maps/api/distancematrix/json?
+              units=imperial&origins=${source.description}&destinations=${destination
+              .description}&key=${GOOGLE_MAPS_APIKEY}`
+          )
+          .then((res) => res.json())
+          .then((data) => {
+              //console.log(data.rows[0].elements[0]);
+              dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
+          });
+      };
+
+      getTravelTime();
+
+  }, [source, destination]);
 
   return (
     <MapView
