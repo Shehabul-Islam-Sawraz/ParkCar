@@ -103,7 +103,7 @@ const PopularSpotsCard = () => {
                                 />
                                 {/** Sets ratings & travel duration fetched from API */}
                                 <Text style = {[{paddingLeft: 5}, styles.textSmall]}>{ratings}  - </Text>
-                                <Text style = {[{paddingLeft: 5}, styles.textSmall]}>{travelTimeInformation?.duration.text} away</Text>
+                                <Text style = {[{paddingLeft: 5}, styles.textSmall]}>{travelTimeInformation?.duration?.text} away</Text>
                               </View>
                             </View>
                             <View>
@@ -117,7 +117,7 @@ const PopularSpotsCard = () => {
                                     (price)
                                   )}  
                               </Text> */}
-                              <Text style = {styles.textMedium}>{travelTimeInformation?.distance.text}</Text>
+                              <Text style = {styles.textMedium}>{travelTimeInformation?.distance?.text}</Text>
                             </View>
                         </TouchableOpacity>
                       )
