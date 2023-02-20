@@ -52,5 +52,6 @@ export const styles = StyleSheet.create({
         marginBottom: 15, 
         marginTop: -45,
         paddingRight: 20,
-    }
+    },
+    menuButton: tw`bg-gray-100 absolute top-8 left-6 z-50 p-3 rounded-full shadow-lg`,
 });
