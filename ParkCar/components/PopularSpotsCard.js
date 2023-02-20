@@ -5,6 +5,8 @@ import { styles } from '../css/MapScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../Themes/Colors';
 import tw from 'tailwind-react-native-classnames';
+import { useSelector } from 'react-redux';
+import { selectTravelTimeInformation } from '../slices/navSlice';
 
 const data = [
     {
@@ -40,6 +42,7 @@ const data = [
 const PopularSpotsCard = () => {
     const navigation = useNavigation();
     const [selectedSpot, setSelectedSpot] = useState(null); // Tracks which spot is selected
+    const travelTimeInformation = useSelector(selectTravelTimeInformation); // Fetch info about travel time from data layer
 
     return (
         <SafeAreaView>
@@ -98,13 +101,23 @@ const PopularSpotsCard = () => {
                                     color = {Colors.black}
                                     size = {16}
                                 />
+                                {/** Sets ratings & travel duration fetched from API */}
                                 <Text style = {[{paddingLeft: 5}, styles.textSmall]}>{ratings}  - </Text>
-                                <Text style = {[{paddingLeft: 5}, styles.textSmall]}>1 hour away</Text>
+                                <Text style = {[{paddingLeft: 5}, styles.textSmall]}>{travelTimeInformation?.duration.text} away</Text>
                               </View>
                             </View>
                             <View>
+                              {/** Sets price & distance from source to destination, fetched from the API */}
                               <Text style = {styles.textMedium}>BDT {price}</Text>
-                              <Text style = {styles.textMedium}>{distance}</Text>
+                              {/* <Text style = {styles.textMedium}>
+                                  {new Intl.NumberFormat("bn-BD", {
+                                    style: "currency",
+                                    currency: "BDT",
+                                  }).format(
+                                    (price)
+                                  )}  
+                              </Text> */}
+                              <Text style = {styles.textMedium}>{travelTimeInformation?.distance.text}</Text>
                             </View>
                         </TouchableOpacity>
                       )

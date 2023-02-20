@@ -12,7 +12,7 @@ const Map = () => {
   const source = useSelector(selectSource);
   const destination = useSelector(selectDestination);
   const mapRef = useRef(null); // Making a reference to map, so we can change its characteristics
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); // Give access to data layer
 
   useEffect(() => {
       if(!source || !destination || !mapRef.current){ // If source or destination is not selected, then return
@@ -44,8 +44,8 @@ const Map = () => {
           )
           .then((res) => res.json())
           .then((data) => {
-              //console.log(data.rows[0].elements[0]);
-              dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
+              // console.log(data.rows[0].elements[0]);
+              dispatch(setTravelTimeInformation(data.rows[0].elements[0])); // Conatins JSON information about travel distance time etc. fetched from distance matrix API
           });
       };
 
