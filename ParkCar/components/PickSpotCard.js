@@ -65,13 +65,15 @@ const PickSpotCard = () => {
                         <Text style = {styles.footerIconText1}>Slots</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style = {styles.footerIconContainer2}>
-                    <Icon 
-                        name = "search"
-                        color = {Colors.black}
-                        size = {16}
-                    />
-                    <Text style = {styles.footerIconText2}>Advance Search</Text>
+                <TouchableOpacity 
+                    style = {styles.footerIconContainer2}
+                    onPress = {() => navigation.navigate("AdvanceSearch")}>
+                        <Icon 
+                            name = "search"
+                            color = {Colors.black}
+                            size = {16}
+                        />
+                        <Text style = {styles.footerIconText2}>Advance Search</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>

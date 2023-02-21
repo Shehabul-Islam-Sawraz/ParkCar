@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import React, { useRef, useEffect } from 'react';
 import tw from 'tailwind-react-native-classnames';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectDestination, selectSource, setTravelTimeInformation } from '../slices/navSlice';
 import MapViewDirections from 'react-native-maps-directions';
 import { GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_APIKEY } from "@env";
-
+import { styles } from '../css/MapScreen';
 
 const Map = () => {
   const source = useSelector(selectSource);
@@ -87,7 +87,15 @@ const Map = () => {
           title = "Origin"
           description= {source.description}
           identifier = "source"
-        />
+        >
+          <Image
+            resizeMode = "contain"
+            style = {[styles.carMarker, {transform: [{
+              rotate: `120deg`,
+            }]}]}
+            source = {require('../assets/images/top-Comfort.png')}
+          />
+        </Marker>
       )}
 
       {destination?.location && (

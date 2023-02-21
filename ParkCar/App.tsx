@@ -7,6 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MapScreen from './screens/MapScreen';
+import AdvanceSearch from './screens/AdvanceSearch';
 
 const Stack = createStackNavigator(); // Initializing Stack Navigator
 
@@ -32,6 +33,13 @@ const HelloWorldApp = () => {
                                 <Stack.Screen
                                     name = 'MapScreen'
                                     component = {MapScreen}
+                                    options = {{
+                                        headerShown: false, // Hiding the header of the screen
+                                    }}
+                                />
+                                <Stack.Screen
+                                    name = 'AdvanceSearch'
+                                    component = {AdvanceSearch}
                                     options = {{
                                         headerShown: false, // Hiding the header of the screen
                                     }}

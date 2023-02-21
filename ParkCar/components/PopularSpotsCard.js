@@ -53,14 +53,13 @@ const PopularSpotsCard = () => {
                         <Icon 
                             name = "chevron-back"
                             color = {Colors.black}
-                            size = {20}
+                            size = {22}
                         />
                 </TouchableOpacity>
                 <Text style = {[styles.selectSpotText, {alignSelf: 'center'}]}>Select a Spot</Text>
             </View>
             <View style={styles.filterSortContainer}>
               <TouchableOpacity
-                  onFocus={"Hello"}
                   style = {styles.sortButton}
                   onPress = {() => navigation.navigate("PickSpotCard")} /////Have to change this////////////
                   >

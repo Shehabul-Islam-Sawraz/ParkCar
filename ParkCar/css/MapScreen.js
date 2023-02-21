@@ -54,4 +54,8 @@ export const styles = StyleSheet.create({
         paddingRight: 20,
     },
     menuButton: tw`bg-gray-100 absolute top-8 left-6 z-50 p-3 rounded-full shadow-lg`,
+    carMarker: {
+        width: 32, 
+        height: 32,
+    }
 });
