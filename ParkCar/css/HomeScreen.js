@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     navCardIcon: tw`p-1 bg-black rounded-full w-10 mt-4`,
     whereFromContainer: {
         container: {
-            flex: 0, 
+            flex: 0,
         },
         textInput: {
             fontSize: 18,

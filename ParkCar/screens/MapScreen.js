@@ -16,32 +16,32 @@ const MapScreen = () => {
   return (
     <View>
       {/** Menu Button Code */}
-      <TouchableOpacity 
-        style = {styles.menuButton}
-        onPress = {() => navigation.navigate("HomeScreen")}>
-          <Icon
-            name = "menu"
-            color = {Colors.black}
-            size = {17}
-          />
+      <TouchableOpacity
+        style={styles.menuButton}
+        onPress={() => navigation.navigate("HomeScreen")}>
+        <Icon
+          name="menu"
+          color={Colors.black}
+          size={17}
+        />
       </TouchableOpacity>
 
-      <View style = {styles.mapScreenView}>
-        <Map/>
+      <View style={styles.mapScreenView}>
+        <Map />
       </View>
-      <View style = {styles.mapScreenView}>
+      <View style={styles.mapScreenView}>
         <Stack.Navigator>
           <Stack.Screen
-            name = "PickSpotCard"
-            component = {PickSpotCard}
-            options = {{
+            name="PickSpotCard"
+            component={PickSpotCard}
+            options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name = "PopularSpotsCard"
-            component = {PopularSpotsCard}
-            options = {{
+            name="PopularSpotsCard"
+            component={PopularSpotsCard}
+            options={{
               headerShown: false,
             }}
           />
