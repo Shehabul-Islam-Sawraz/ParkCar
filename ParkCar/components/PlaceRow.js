@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../Themes/Colors';
 
 const PlaceRow = ({ data }) => {
-    console.log(data);
+    // console.log(data);
     return (
         <View style={styles.placeRow}>
             <View style={styles.iconContainer}>

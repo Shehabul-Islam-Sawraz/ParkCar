@@ -7,6 +7,7 @@ import { selectDestination, selectSource, setTravelTimeInformation } from '../sl
 import MapViewDirections from 'react-native-maps-directions';
 import { GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_APIKEY } from "@env";
 import { styles } from '../css/MapScreen';
+import { setSource, setDestination } from '../slices/navSlice';
 
 const Map = () => {
   const source = useSelector(selectSource);
@@ -87,8 +88,18 @@ const Map = () => {
           title="Origin"
           description={source.description}
           identifier="source"
+          draggable={true}
+          onDragStart={(e) => {
+            //console.log(e.nativeEvent.coordinate)
+          }}
+          onDragEnd={(e) => {
+            dispatch(setSource({
+              location: { "lat": e.nativeEvent.coordinate.latitude, "lng": e.nativeEvent.coordinate.longitude },
+              description: source.description,
+            }));
+          }}
         >
-          <Image
+          {/* <Image
             resizeMode="contain"
             style={[styles.carMarker, {
               transform: [{
@@ -96,7 +107,7 @@ const Map = () => {
               }]
             }]}
             source={require('../assets/images/top-Comfort.png')}
-          />
+          /> */}
         </Marker>
       )}
 
