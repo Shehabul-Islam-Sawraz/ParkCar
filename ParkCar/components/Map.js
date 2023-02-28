@@ -1,9 +1,9 @@
 import { Text, View, Image } from 'react-native';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import tw from 'tailwind-react-native-classnames';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDestination, selectSource, setTravelTimeInformation } from '../slices/navSlice';
+import { selectDestination, selectSearchedSpots, selectSource, setTravelTimeInformation } from '../slices/navSlice';
 import MapViewDirections from 'react-native-maps-directions';
 import { GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_APIKEY } from "@env";
 import { styles } from '../css/MapScreen';
@@ -12,8 +12,20 @@ import { setSource, setDestination } from '../slices/navSlice';
 const Map = () => {
   const source = useSelector(selectSource);
   const destination = useSelector(selectDestination);
+  const searchedSpots = useSelector(selectSearchedSpots);
   const mapRef = useRef(null); // Making a reference to map, so we can change its characteristics
   const dispatch = useDispatch(); // Give access to data layer
+  // const [src, setSrc] = useState();
+  // const [dest, setDest] = useState();
+  // setSrc(source);
+  // setDest(destination);
+
+  // if (!searchedSpots) {
+  //   console("No data");
+  // }
+  // else {
+  //   console.log(searchedSpots[0]);
+  // }
 
   useEffect(() => {
     if (!source || !destination || !mapRef.current) { // If source or destination is not selected, then return
@@ -63,8 +75,8 @@ const Map = () => {
       initialRegion={{
         latitude: source.location.lat,
         longitude: source.location.lng,
-        latitudeDelta: 0.004,
-        longitudeDelta: 0.0005,
+        latitudeDelta: 0.0222,
+        longitudeDelta: 0.0121,
       }}
     >
 
@@ -88,6 +100,7 @@ const Map = () => {
           title="Origin"
           description={source.description}
           identifier="source"
+          pinColor="gold"
           draggable={true}
           onDragStart={(e) => {
             //console.log(e.nativeEvent.coordinate)
@@ -120,7 +133,30 @@ const Map = () => {
           title="Destination"
           description={destination.description}
           identifier="destination"
+          draggable={true}
+          onDragStart={(e) => {
+            //console.log(e.nativeEvent.coordinate)
+          }}
+          onDragEnd={(e) => {
+            dispatch(setDestination({
+              location: { "lat": e.nativeEvent.coordinate.latitude, "lng": e.nativeEvent.coordinate.longitude },
+              description: source.description,
+            }));
+          }}
         />
+      )}
+
+      {searchedSpots && (
+        searchedSpots.map((spot) => (
+          <Marker
+            key={spot.id}
+            coordinate={{ latitude: spot.latitude, longitude: spot.longitude }}
+            title="Spot"
+            description={spot.spotName}
+            identifier="spot"
+            pinColor="blue"
+          />
+        ))
       )}
     </MapView>
   );

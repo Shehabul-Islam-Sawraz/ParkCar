@@ -1,12 +1,13 @@
 import { Text, SafeAreaView, TouchableOpacity, View, FlatList } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from '../css/MapScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../Themes/Colors';
 import tw from 'tailwind-react-native-classnames';
 import { useSelector } from 'react-redux';
-import { selectTravelTimeInformation } from '../slices/navSlice';
+import { selectTravelTimeInformation, setDestination, setSearchedSpots } from '../slices/navSlice';
+import { useDispatch } from 'react-redux';
 
 const data = [
   {
@@ -15,6 +16,8 @@ const data = [
     ratings: "4.7",
     price: "50",
     distance: "1.2 mi",
+    latitude: 23.723676851187783,
+    longitude: 90.39576508234461,
   },
   {
     id: "2",
@@ -22,6 +25,8 @@ const data = [
     ratings: "4.3",
     price: "40",
     distance: "0.7 mi",
+    latitude: 23.723969061637938,
+    longitude: 90.39507441353427,
   },
   {
     id: "3",
@@ -29,6 +34,8 @@ const data = [
     ratings: "4.4",
     price: "65",
     distance: "1.3 mi",
+    latitude: 23.72443736414864,
+    longitude: 90.39466150013554,
   },
   {
     id: "4",
@@ -36,6 +43,8 @@ const data = [
     ratings: "4.6",
     price: "40",
     distance: "0.6 mi",
+    latitude: 23.724498752593306,
+    longitude: 90.39557881558423,
   },
 ];
 
@@ -43,6 +52,11 @@ const PopularSpotsCard = () => {
   const navigation = useNavigation();
   const [selectedSpot, setSelectedSpot] = useState(null); // Tracks which spot is selected
   const travelTimeInformation = useSelector(selectTravelTimeInformation); // Fetch info about travel time from data layer
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setSearchedSpots(data));
+  });
 
   return (
     <SafeAreaView>

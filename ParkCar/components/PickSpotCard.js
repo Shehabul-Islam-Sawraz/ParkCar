@@ -1,12 +1,12 @@
 import { Text, View, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../css/MapScreen';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { GOOGLE_MAPS_API_KEY } from "@env";
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { setDestination } from '../slices/navSlice';
+import { setDestination, setSearchedSpots } from '../slices/navSlice';
 import FavSourceSpots from './FavSourceSpots';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../Themes/Colors';
