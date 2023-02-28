@@ -50,7 +50,7 @@ const HomeScreen = ({ navigation }) => {
           }}
           enablePoweredByContainer={false}
           fetchDetails={true}
-          onFail={error => console.log('error' + error)}
+          onFail={error => console.log('error: ' + error)}
           renderRow={(data) => <PlaceRow data={data} />}
         />
         <Navigator />

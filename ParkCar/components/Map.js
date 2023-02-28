@@ -149,10 +149,10 @@ const Map = () => {
       {searchedSpots && (
         searchedSpots.map((spot) => (
           <Marker
-            key={spot.id}
+            key={spot.location_id + spot.parking_slot_id}
             coordinate={{ latitude: spot.latitude, longitude: spot.longitude }}
             title="Spot"
-            description={spot.spotName}
+            description={spot.thana + ", s" + spot.road_no}
             identifier="spot"
             pinColor="blue"
           />

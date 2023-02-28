@@ -16,6 +16,27 @@ const PickSpotCard = () => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
 
+    const getData = async () => {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                {
+                    "latitude": 23.72754,
+                    "longitude": 90.38596,
+                }
+            )
+        }
+        const response = await fetch("https://parkcarserver.onrender.com/search", options);
+        const json = await response.json();
+        //console.log(json.data[0]);
+
+        dispatch(setSearchedSpots(json.data));
+    }
+
     return (
         <SafeAreaView style={styles.pickSpotContainer}>
             <Text style={styles.welcomeText}>
@@ -42,6 +63,8 @@ const PickSpotCard = () => {
                                 location: details.geometry.location,
                                 description: data.description,
                             }));
+
+                            getData();
 
                             navigation.navigate("PopularSpotsCard");
                         }}

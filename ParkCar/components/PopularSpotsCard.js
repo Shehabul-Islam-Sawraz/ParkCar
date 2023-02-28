@@ -6,47 +6,47 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../Themes/Colors';
 import tw from 'tailwind-react-native-classnames';
 import { useSelector } from 'react-redux';
-import { selectTravelTimeInformation, setDestination, setSearchedSpots } from '../slices/navSlice';
+import { selectSearchedSpots, selectTravelTimeInformation, setDestination, setSearchedSpots } from '../slices/navSlice';
 import { useDispatch } from 'react-redux';
 
-const data = [
-  {
-    id: "1",
-    spotName: "Azimpur Officers Quarter",
-    ratings: "4.7",
-    price: "50",
-    distance: "1.2 mi",
-    latitude: 23.723676851187783,
-    longitude: 90.39576508234461,
-  },
-  {
-    id: "2",
-    spotName: "New Market Masjid",
-    ratings: "4.3",
-    price: "40",
-    distance: "0.7 mi",
-    latitude: 23.723969061637938,
-    longitude: 90.39507441353427,
-  },
-  {
-    id: "3",
-    spotName: "Education Board",
-    ratings: "4.4",
-    price: "65",
-    distance: "1.3 mi",
-    latitude: 23.72443736414864,
-    longitude: 90.39466150013554,
-  },
-  {
-    id: "4",
-    spotName: "Bakshibazar",
-    ratings: "4.6",
-    price: "40",
-    distance: "0.6 mi",
-    latitude: 23.724498752593306,
-    longitude: 90.39557881558423,
-  },
-];
+// const data = [
+//   {
+//     id: "1",
+//     spotName: "Azimpur Officers Quarter",
+//     ratings: "4.7",
+//     price: "50",
+//     distance: "1.2 mi",
+//     latitude: 23.723676851187783,
+//     longitude: 90.39576508234461,
+//   },
+//   {
+//     id: "2",
+//     spotName: "New Market Masjid",
+//     ratings: "4.3",
+//     price: "40",
+//     distance: "0.7 mi",
+//     latitude: 23.723969061637938,
+//     longitude: 90.39507441353427,
+//   },
+//   {
+//     id: "3",
+//     spotName: "Education Board",
+//     ratings: "4.4",
+//     price: "65",
+//     distance: "1.3 mi",
+//     latitude: 23.72443736414864,
+//     longitude: 90.39466150013554,
+//   },
+//   {
+//     id: "4",
+//     spotName: "Bakshibazar",
+//     ratings: "4.6",
+//     price: "40",
+//     distance: "0.6 mi",
+//     latitude: 23.724498752593306,
+//     longitude: 90.39557881558423,
+//   },
+// ];
 
 const PopularSpotsCard = () => {
   const navigation = useNavigation();
@@ -54,9 +54,32 @@ const PopularSpotsCard = () => {
   const travelTimeInformation = useSelector(selectTravelTimeInformation); // Fetch info about travel time from data layer
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(setSearchedSpots(data));
-  });
+  const data = useSelector(selectSearchedSpots);
+
+  // const getData = async () => {
+  //   const options = {
+  //     method: 'GET',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(
+  //       {
+  //         "latitude": 23.72754,
+  //         "longitude": 90.38596,
+  //       }
+  //     )
+  //   }
+  //   const response = await fetch("https://parkcarserver.onrender.com/search", options);
+  //   const json = await response.json();
+  //   console.log(json);
+  //   return json;
+  // }
+
+  // useEffect(() => {
+  //   dispatch(setSearchedSpots(data));
+  //   //getData();
+  // });
 
   return (
     <SafeAreaView>
@@ -100,14 +123,14 @@ const PopularSpotsCard = () => {
           contentContainerStyle={{ paddingBottom: 5 }} // Without this, last item of FlatList gets hidden
           style={{ height: 225 }}
           data={data}
-          keyExtractor={item => item.id}
-          renderItem={({ item: { id, spotName, ratings, price, distance }, item }) => {
+          keyExtractor={item => item.location_id + item.parking_slot_id}
+          renderItem={({ item: { location_id, thana, road_no, rating, base_fare, distance }, item }) => {
             return (
               <TouchableOpacity
-                style={[styles.popularSpotContainer, styles.popularSpotContainer2, tw`${id === selectedSpot?.id && "bg-gray-300"}`]}
+                style={[styles.popularSpotContainer, styles.popularSpotContainer2, tw`${location_id === selectedSpot?.location_id && "bg-gray-300"}`]}
                 onPress={() => setSelectedSpot(item)}>
                 <View>
-                  <Text style={styles.textLarge}>{spotName}</Text>
+                  <Text style={styles.textLarge}>{thana + ", " + road_no}</Text>
                   <View style={{ flexDirection: 'row' }}>
                     <Icon
                       name="star"
@@ -115,13 +138,13 @@ const PopularSpotsCard = () => {
                       size={16}
                     />
                     {/** Sets ratings & travel duration fetched from API */}
-                    <Text style={[{ paddingLeft: 5 }, styles.textSmall]}>{ratings}  - </Text>
+                    <Text style={[{ paddingLeft: 5 }, styles.textSmall]}>{rating}  - </Text>
                     <Text style={[{ paddingLeft: 5 }, styles.textSmall]}>{travelTimeInformation?.duration?.text} away</Text>
                   </View>
                 </View>
                 <View>
                   {/** Sets price & distance from source to destination, fetched from the API */}
-                  <Text style={styles.textMedium}>BDT {price}</Text>
+                  <Text style={styles.textMedium}>BDT {base_fare}</Text>
                   {/* <Text style = {styles.textMedium}>
                                   {new Intl.NumberFormat("bn-BD", {
                                     style: "currency",
