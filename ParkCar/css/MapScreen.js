@@ -34,8 +34,8 @@ export const styles = StyleSheet.create({
     selectSpotText: tw`text-center py-5 text-xl`,
     popularSpotContainer: tw`flex-row items-center justify-between px-6 mb-2 bg-gray-200 rounded-lg`,
     popularSpotContainer2: {
-        height: 80, 
-        width: dimensionScreen.width/1.04, 
+        height: 80,
+        width: dimensionScreen.width / 1.04,
         alignSelf: 'center',
     },
     textLarge: tw`text-lg font-bold text-black`,
@@ -47,15 +47,15 @@ export const styles = StyleSheet.create({
         paddingLeft: 18,
     },
     filterSortContainer: {
-        flexDirection: 'row', 
-        justifyContent: 'flex-end', 
-        marginBottom: 15, 
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginBottom: 15,
         marginTop: -45,
         paddingRight: 20,
     },
     menuButton: tw`bg-gray-100 absolute top-8 left-6 z-50 p-3 rounded-full shadow-lg`,
     carMarker: {
-        width: 32, 
+        width: 32,
         height: 32,
     }
 });

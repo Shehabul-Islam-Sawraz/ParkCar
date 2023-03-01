@@ -152,7 +152,7 @@ const Map = () => {
             key={spot.location_id + spot.parking_slot_id}
             coordinate={{ latitude: spot.latitude, longitude: spot.longitude }}
             title="Spot"
-            description={spot.thana + ", s" + spot.road_no}
+            description={spot.thana + ", " + spot.road_no}
             identifier="spot"
             pinColor="blue"
           />

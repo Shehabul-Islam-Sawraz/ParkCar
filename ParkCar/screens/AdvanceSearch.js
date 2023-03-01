@@ -9,7 +9,7 @@ import Colors from '../Themes/Colors';
 import PlaceRow from '../components/PlaceRow';
 import { useDispatch } from 'react-redux';
 import { setDistance, setDestination, setRatings, setPrice } from '../slices/searchSlice';
-
+import { useNavigation } from '@react-navigation/native';
 
 const securityMerasures = {
     'CC Camera': false,
@@ -21,6 +21,7 @@ const AdvanceSearch = () => {
     const [measures, setMeasures] = useState(securityMerasures);
     const [toggleButton, setToggleButton] = useState(false);
     const dispatch = useDispatch();
+    const navigation = useNavigation();
 
     const sendSearchData = () => {
         let security = []
@@ -89,7 +90,6 @@ const AdvanceSearch = () => {
                                 description: data.description,
                             }));
 
-                            navigation.navigate("PopularSpotsCard");
                         }}
                         enablePoweredByContainer={false}
                         fetchDetails={true}
@@ -187,6 +187,7 @@ const AdvanceSearch = () => {
                     onPress={() => {
                         //setToggleButton(toggleButton => !toggleButton)
                         sendSearchData();
+                        navigation.navigate("AdvanceSearchSpots");
                     }}>
                     <Text style={styles.saveText}>Search</Text>
                 </TouchableOpacity>

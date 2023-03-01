@@ -9,6 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import MapScreen from './screens/MapScreen';
 import AdvanceSearch from './screens/AdvanceSearch';
 import Geolocation from '@react-native-community/geolocation';
+import AdvancedSearchSpots from './components/AdvanceSearchSpots';
 
 const Stack = createStackNavigator(); // Initializing Stack Navigator
 navigator.geolocation = require('@react-native-community/geolocation'); // For accessing current location
@@ -82,13 +83,13 @@ const HelloWorldApp = () => {
                                     headerShown: false, // Hiding the header of the screen
                                 }}
                             />
-                            {/* <Stack.Screen
+                            <Stack.Screen
                                 name='AdvanceSearchSpots'
-                                component={AdvanceSearch}
+                                component={AdvancedSearchSpots}
                                 options={{
                                     headerShown: false, // Hiding the header of the screen
                                 }}
-                            /> */}
+                            />
                         </Stack.Navigator>
                     </KeyboardAvoidingView>
                 </SafeAreaProvider>
