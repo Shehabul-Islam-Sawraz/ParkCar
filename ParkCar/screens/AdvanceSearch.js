@@ -7,6 +7,9 @@ import CheckBox from '@react-native-community/checkbox';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../Themes/Colors';
 import PlaceRow from '../components/PlaceRow';
+import { useDispatch } from 'react-redux';
+import { setDistance, setDestination, setRatings, setPrice } from '../slices/searchSlice';
+
 
 const securityMerasures = {
     'CC Camera': false,
@@ -17,12 +20,25 @@ const securityMerasures = {
 const AdvanceSearch = () => {
     const [measures, setMeasures] = useState(securityMerasures);
     const [toggleButton, setToggleButton] = useState(false);
+    const dispatch = useDispatch();
+
+    const sendSearchData = () => {
+        let security = []
+        Object.entries(measures).map(([key, value]) => {
+            // return (
+            //     value && console.log(key)
+            // );
+            value && security.push(key.toLowerCase());
+        });
+        console.log(security);
+    };
+
     return (
         <SafeAreaView style={styles.searchContainer}>
             <View>
                 <Text style={styles.advanceSearchTitle}>Advance Spots Search</Text>
                 <View>
-                    <GooglePlacesAutocomplete
+                    {/* <GooglePlacesAutocomplete
                         placeholder="Current location?"
                         nearbyPlacesAPI='GooglePlacesSearch'
                         debounce={400}
@@ -50,11 +66,11 @@ const AdvanceSearch = () => {
                         returnKeyType={"search"}
                         onFail={error => console.log('error' + error)}
                         renderRow={(data) => <PlaceRow data={data} />}
-                    />
+                    /> */}
 
 
                     <GooglePlacesAutocomplete
-                        placeholder="Where to Rent?"
+                        placeholder="Where to Park?"
                         nearbyPlacesAPI='GooglePlacesSearch'
                         debounce={400}
                         styles={styles.toInputBox}
@@ -84,14 +100,26 @@ const AdvanceSearch = () => {
                     />
                     <TextInput
                         style={styles.distanceInput}
-                        onChangeText={(text) => { }}
+                        onChangeText={(text) => {
+                            dispatch(setDistance(text));
+                        }}
                         placeholder="Distance Range?"
                         keyboardType="decimal-pad"
                     />
                     <TextInput
                         style={styles.distanceInput}
-                        onChangeText={(text) => { }}
-                        placeholder="No. of Slots?"
+                        onChangeText={(text) => {
+                            dispatch(setRatings(text));
+                        }}
+                        placeholder="Ratings?"
+                        keyboardType="decimal-pad"
+                    />
+                    <TextInput
+                        style={styles.distanceInput}
+                        onChangeText={(text) => {
+                            dispatch(setPrice(text));
+                        }}
+                        placeholder="Price?"
                         keyboardType="decimal-pad"
                     />
                 </View>
@@ -153,6 +181,15 @@ const AdvanceSearch = () => {
                     })}
                 </View> */}
                 </View>
+            </View>
+            <View style={styles.saveButton}>
+                <TouchableOpacity
+                    onPress={() => {
+                        //setToggleButton(toggleButton => !toggleButton)
+                        sendSearchData();
+                    }}>
+                    <Text style={styles.saveText}>Search</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );

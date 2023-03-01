@@ -68,10 +68,17 @@ export const styles = StyleSheet.create({
         paddingBottom: 5,
     },
     saveButton: {
-        top: 50,
+        top: 65,
         width: '30%',
         alignSelf: "center",
         alignItems: "center",
+        backgroundColor: '#000',
+        padding: 7,
+        borderRadius: 15,
+    },
+    saveText: {
+        color: '#fff',
+        fontSize: 16,
     },
     iconTitle: {
         flexDirection: "row",

@@ -82,6 +82,13 @@ const HelloWorldApp = () => {
                                     headerShown: false, // Hiding the header of the screen
                                 }}
                             />
+                            {/* <Stack.Screen
+                                name='AdvanceSearchSpots'
+                                component={AdvanceSearch}
+                                options={{
+                                    headerShown: false, // Hiding the header of the screen
+                                }}
+                            /> */}
                         </Stack.Navigator>
                     </KeyboardAvoidingView>
                 </SafeAreaProvider>

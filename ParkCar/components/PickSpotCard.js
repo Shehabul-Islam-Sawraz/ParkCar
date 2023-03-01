@@ -1,12 +1,12 @@
 import { Text, View, TouchableOpacity } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../css/MapScreen';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { GOOGLE_MAPS_API_KEY } from "@env";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { setDestination, setSearchedSpots } from '../slices/navSlice';
+import { selectDestination, selectSource, setDestination, setSearchedSpots } from '../slices/navSlice';
 import FavSourceSpots from './FavSourceSpots';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../Themes/Colors';
@@ -15,6 +15,8 @@ import PlaceRow from '../components/PlaceRow';
 const PickSpotCard = () => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
+    const dest = useSelector(selectDestination);
+    const [loctn, setLocation] = useState();
 
     const getData = async () => {
         const options = {
@@ -25,8 +27,10 @@ const PickSpotCard = () => {
             },
             body: JSON.stringify(
                 {
+                    // "latitude": loctn?.lat,
+                    // "longitude": loctn?.lng,
                     "latitude": 23.72754,
-                    "longitude": 90.38596,
+                    "longitude": 90.38596
                 }
             )
         }
@@ -58,13 +62,17 @@ const PickSpotCard = () => {
                             // 'details' is provided when fetchDetails = true
                             // console.log(data, details);
 
+                            setLocation(details.geometry.location);
+
                             // Setting the selected location as source
                             dispatch(setDestination({
                                 location: details.geometry.location,
                                 description: data.description,
                             }));
 
-                            getData();
+                            setTimeout(() => {
+                                getData();
+                            }, 1000);
 
                             navigation.navigate("PopularSpotsCard");
                         }}
